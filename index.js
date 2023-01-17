@@ -8,7 +8,7 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: "https://cookies.onrender.com",
+    origin: "https://front-end-cookies.vercel.app",
   })
 );
 const port = 4000;
