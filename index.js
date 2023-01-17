@@ -5,7 +5,12 @@ const cors = require("cors");
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: "https://cookies.onrender.com",
+  })
+);
 const port = 4000;
 
 app.post("/login", async (req, res) => {
@@ -30,7 +35,11 @@ app.post("/login", async (req, res) => {
 // insert text
 app.post("/message", async (req, res) => {
   const { message } = req.body;
-  res.cookie("message", Deepka).json({ status: "true" });
+  try {
+    res.status(201).cookie("message", message).json({ status: "true" });
+  } catch (error) {
+    res.status(500).json({ status: "false" });
+  }
 });
 
 // Make Cookies
@@ -38,17 +47,10 @@ app.get("/message/a", async (req, res) => {
   res.cookie("Deepak", "Deepak Kumar").json({ status: "true" });
 });
 
-
 // search text
 app.get("/message", async (req, res) => {
-  const query = req.query;
   const cookieMessage = req.cookies.message;
-  const text = query.text;
-  if (text === cookieMessage) {
-    res.json({ text });
-  } else {
-    res.json({ text: "Not Found" });
-  }
+  res.status(200).json({ cookieMessage });
 });
 
 // clear text
