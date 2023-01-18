@@ -7,8 +7,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    credentials: true,
-    origin: "https://front-end-cookies.vercel.app",
+    origin: ["http://localhost:3000/", "https://front-end-cookies.vercel.app/"],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "Access-Control-Allow-Header":
+      "Origin, X-Requested-With, Content-Type, Accept",
+    credentials: false,
   })
 );
 const port = 4000;
