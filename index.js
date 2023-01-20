@@ -35,11 +35,11 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// insert text
 app.post("/message", async (req, res) => {
   const { message } = req.body;
+  console.log('message:', message)
   try {
-    res.status(201).cookie("message", message).json({ status: "true" });
+    res.status(201).cookie("message", "message").json({ status: "true" });
   } catch (error) {
     res.status(500).json({ status: "false" });
   }
